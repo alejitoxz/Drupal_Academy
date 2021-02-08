@@ -2,83 +2,107 @@
 
 namespace PruebaPhp;
 
-class MandoXbox implements MandoInterfaz {
 
-  /**
-   * function ejecutar.
-   */
-  public function ejecutar($mensaje = "") : void {
-    if ($this->estado == 1) {
-      echo "El Boton On ejecuta MandoXbox: $mensaje";
-      echo "<br>";
-      }
-      else if($this->estado==2){
-          echo "El Joystick del MandoXbox Izquierdo es: $mensaje";
-          echo "<br>";
-      }
-      else if($this->estado==3){
-          echo "El Joystick del MandoXbox Derecho es: $mensaje";
-          echo "<br>";
-      }
-      else if($this->estado==4){
-          echo "El boton (A) del MandoXbox ejecuta: $mensaje";
-          echo "<br>";
-      }
-      else if($this->estado==5){
-          echo "El boton (B) del MandoXbox ejecuta: $mensaje";
-          echo "<br>";
-      }
-      else if($this->estado==6){
-          echo "El boton (Y) del MandoXbox ejecuta: $mensaje";
-          echo "<br>";
-      }
-      else if($this->estado==7){
-          echo "El boton (X) del MandoXbox ejecuta: $mensaje";
-          echo "<br>";
-      }
-      else if($this->estado==8){
-          echo "Los gatillos del MandoXbox ejecuta: $mensaje";
-          echo "<br>";
-      }
-      else if($this->estado==9){
-        echo "El boton Conexion de Xbox ejecuta: $mensaje";
+class MandoXbox extends Mando{
+
+    protected $teclas;
+    protected $encender;
+    
+    function __construct(){
+        $this->teclas = [
+            'Y',
+            'X',
+            'A',
+            'B',
+            'flecha_arriba',
+            'flecha_abajo',
+            'flecha_izquierda',
+            'flecha_derecha',
+        ];
+        }
+
+    function ejecutar($accion) {
+        switch($accion){
+            case 'Y';
+            $this->oprimirY();
+            break;
+
+            case 'X';
+            $this->oprimirX();
+            break;
+
+            case 'A';
+            $this->oprimirA();
+            break;
+
+            case 'B';
+            $this->oprimirB();
+            break;
+
+            case 'flecha_arriba';
+            $this->oprimirFlechaArriba();
+            break;
+
+            case 'flecha_abajo';
+            $this->oprimirFlechaAbajo();
+            break;
+
+            case 'flecha_izquierda';
+            $this->oprimirFlechaIzquierda();
+            break;
+
+            case 'flecha_derecha';
+            $this->oprimirFlechaDerecha();
+            break;
+            default;
+            echo "alguna accion";
+            break;
+        }
+    }
+        function estado($encender){
+        if($this->encender == true){
+            echo "Mando Encendido";
+        }
+        else {
+            echo "Mando Apagado";
+        }
+    }
+    protected function oprimirY(){
+        echo "Se oprime la Y";
         echo "<br>";
     }
-      else if ($this->estado==0){
-        echo"El Botton of funciona para MandoXbox: $mensaje";
+    protected function oprimirX(){
+        echo "Se oprime la X";
         echo "<br>";
-        }
-  }
-  public function apagarMando() : void{
-    $this->estado = 0;
+    }
+    protected function oprimirA(){
+        echo "Se oprime la A";
+        echo "<br>";
+    }
+    protected function oprimirB(){
+        echo "Se oprime la B";
+        echo "<br>";
+    }
+    protected function oprimirFlechaArriba(){
+        echo "Se oprime Flecha Arriba";
+        echo "<br>";
+    }
+    protected function oprimirFlechaAbajo(){
+        echo "Se oprime Flecha Abajo";
+        echo "<br>";
+    }
+    protected function oprimirFlechaIzquierda(){
+        echo "Se oprime Flecha Izquierda";
+        echo "<br>";
+    }
+    protected function oprimirFlechaDerecha(){
+        echo "Se oprime Flcha Derecha";
+        echo "<br>";
+    }
+    public function encenderMando(){
+        $this->encender = true;
+    }
+    public function apagarMando(){
+        $this->encender = false;
+    }
 }
-
-public function encenderMando() : void{
-    $this->estado = 1;
-}
-public function movimientoIzquierdo() : void{
-    $this->estado = 2;
-}
-public function movimientoDerecho() : void{
-    $this->estado = 3;
-}
-public function teclaA() : void{
-    $this->estado = 4;
-}
-public function teclaB() : void{
-    $this->estado = 5;
-} 
-public function teclaY() : void{
-    $this->estado = 6;
-}
-public function teclaX() : void{
-    $this->estado = 7;
-}
-public function gatillos() : void{
-    $this->estado = 8;
-}
-public function conexion() : void{
-    $this->estado = 9;
-}
-}
-?>

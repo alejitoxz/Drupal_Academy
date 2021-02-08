@@ -13,15 +13,14 @@ use PruebaPhp\Mando;
 use PruebaPhp\MandoXbox;
 use Modelo\user\Usuario;
 use PruebaPhp\Consola;
-use PruebaPhp\MandoAccion;
+use PruebaPhp\MandoPlay;
+use PruebaPhp\ConsolaXbox;
 
+$config = [];
+require 'settings.php';
 require '../../vendor/autoload.php';
-$configuration = [
-  'settings' => [
-      'displayErrorDetails' => true,
-  ],
-];
-$c = new \Slim\Container($configuration);
+$c = new \Slim\Container(['settings' => $config] );
+
 $app = new \Slim\App($c);
 
 // Set Slim container.
@@ -107,31 +106,16 @@ $app->get('/impresora', function (Request $request, Response $response) {
 });
 
 $app->get('/mando', function (Request $request, Response $response) {
-  echo "Mando";
-  echo "<br>";
-  $mando = new Mando();
+  $mando = new MandoPlay;
   $consola = new Consola($mando);
+  $consola->usuarioUsandoMando();
   $consola->encenderConsola();
-  $consola->accionesMando();
-  $consola->apagarConsola();
-  echo "<br>";
-  echo "MandoPlay";
-  echo "<br>";
-  $HijoMando = new Mando();
-  $consola = new Consola($mando);
+  
+echo "<br>";
+  $mando = new MandoXbox;
+  $consolaXbox = new ConsolaXbox($mando);
+  $consolaXbox->usuarioUsandoMandoXbox();
   $consola->encenderConsola();
-  $consola->accionesMando();
-  $consola->apagarConsola();
-  echo "<br>";
-  echo "MandoXbox";
-  echo "<br>";
-  $mando = new MandoXbox();
-  $consola = new Consola($mando);
-  $consola->encenderConsola();
-  $consola->accionesMando();
-  $consola->apagarConsola();
-  echo "<br>";
-
 
   return $response;
 });
