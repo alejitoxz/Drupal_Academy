@@ -1,6 +1,6 @@
 <?php
 
-namespace PruebaPhp;
+namespace PruebaPhp\model\Usuario;
 
 class Usuario{
     protected $id;

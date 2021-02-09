@@ -5,8 +5,7 @@
     },
     "autoload": {
         "psr-4": {
-            "PruebaPhp\\": "src/",
-            "Modelo\\": "src/model/"
+            "PruebaPhp\\": "src/"
         }
     }
 }
