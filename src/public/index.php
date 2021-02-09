@@ -7,14 +7,8 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\App;
 use Slim\Views\PhpRenderer;
-use PruebaPhp\Impresora;
-use PruebaPhp\ImpresoraPapel;
-use PruebaPhp\Mando;
-use PruebaPhp\MandoXbox;
 use Modelo\user\Usuario;
-use PruebaPhp\Consola;
-use PruebaPhp\MandoPlay;
-use PruebaPhp\ConsolaXbox;
+
 
 $config = [];
 require 'settings.php';
