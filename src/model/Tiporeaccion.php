@@ -1,8 +1,8 @@
 <?php
 
-namespace PruebaPhp\model\Reaccion;
+namespace PruebaPhp\model\TipoReaccion;
 
-class Reaccion{
+class TipoReaccion{
     protected $id;
     protected $tipoiCara;
     protected $imagen;
