@@ -7,6 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\App;
 use Slim\Views\PhpRenderer;
+use PruebaPhp\util\db\QueryMysql;
 
 
 
@@ -23,7 +24,7 @@ $container['view'] = new PhpRenderer('../templates/');
 $container['db'] = function ($c) {
   $db = $c['settings']['db'];
   $pdo = new PDO('mysql:host=' . $db['host'] . ';dbname=' . $db['dbname'],
-      $db['user'], $db['pass']);
+  $db['user'], $db['pass']);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
   return $pdo;
@@ -45,7 +46,16 @@ $app->post('/registro', function (Request $request, Response $response) {
 
 $app->get('/pais', function (Request $request, Response $response) {
 
-  $response = $this->view->render($response, 'pais.phtml');
+  $query = new QueryMysql($this->db);
+  $query->insert('pais', ['name'], ['Venezuela']);
+  $fields = ['name'];
+  $conditions = [
+    ['column' => 'name', 'value' => 'Colombia'],
+    ['column' => 'name', 'value' => 'Bolivia'],
+  ];
+  $return = $query->find('pais', $fields, $conditions, 'OR');
+  var_dump($return);
+  //$query->delete('pais', $conditions);
   
   return $response;
 });

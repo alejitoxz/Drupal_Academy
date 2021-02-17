@@ -1,9 +1,10 @@
 <?php
  
- namespace PruebaPhp\util\bd;
+ namespace PruebaPhp\util\db;
 
  interface QueryInterface{
-     public function insert($tableName, $fields,$values);
-     public function Update($tableName, $fields, $values);
-     public function delete(String $tableName, String $columns, String $values, String $condicion);
+    public function insert(String $tableName, array $columns, array $values);
+    public function delete(String $tableName, array $conditions);
+    public function update(String $tableName, array $updateValues, array $conditions);
+    public function find(String $tableName, array $fields = [], array $conditions = [], $typeCondition = "");
  }
