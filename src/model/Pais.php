@@ -1,15 +1,24 @@
 <?php
 
-namespace PruebaPhp\model\Pais;
+namespace PruebaPhp\model;
 
-class Pais{
+class Pais implements Model{
+    
     protected $id;
-    protected $name;
+    protected $nombre;
+
+    public function __construct(String $nombre, String $id = NULL) {
+        $this->nombre = $nombre;
+        $this->id = $id;
+      }
 
     public function getId(){
         return $this->id;
     }
-    public function getName(){
-        return $this->name;
+    public function getNombre(){
+        return $this->nombre;
     }
+    public function setName($nombre) {
+        $this->nombre = $nombre;
+      }
 }

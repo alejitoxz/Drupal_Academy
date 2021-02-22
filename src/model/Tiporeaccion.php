@@ -1,11 +1,19 @@
 <?php
 
-namespace PruebaPhp\model\TipoReaccion;
+namespace PruebaPhp\model;
 
-class TipoReaccion{
+class TipoReaccion implements Model{
+
+    
     protected $id;
     protected $tipoiCara;
     protected $imagen;
+
+    public function __construct(String $tipoCara,String $imagen, String $id = NULL) {
+        $this->tipoCara = $tipoCara;
+        $this->imagen = $imagen;
+        $this->id = $id;
+      }
 
     public function getId(){
         return $this->id;
@@ -16,4 +24,4 @@ class TipoReaccion{
     public function getImagen(){
         return $this->imagen;
     }
-}
+}   

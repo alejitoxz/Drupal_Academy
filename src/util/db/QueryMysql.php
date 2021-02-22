@@ -22,7 +22,6 @@
       $interrogacion = array_fill(0, $valor, "?");
       $columnsString = implode(",", $columns);
       $query = "INSERT INTO $tableName($columnsString) VALUES(" . implode(",", $interrogacion) . ")";
-  
       $this->conection->prepare($query)->execute($values);
     }
   
