@@ -1,12 +1,19 @@
 <?php
 
-namespace PruebaPhp\model\Publicacion;
+namespace PruebaPhp\model;
 
-class Publicacion{
+class Publicacion implements Model{
     protected $id;
     protected $idUsuario;
     protected $date;
     protected $texto;
+
+    public function __construct($idUsuario, $date, $texto, $id = NULL) {
+        $this->idUsuario = $idUsuario;
+        $this->date = $date;
+        $this->texto = $texto;
+        $this->id = $id;
+    }
 
     public function getId(){
         return $this->id;

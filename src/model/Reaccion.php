@@ -1,12 +1,19 @@
 <?php
 
-namespace PruebaPhp\model\Reaccion;
+namespace PruebaPhp\model;
 
-class Reaccion{
+class Reaccion implements Model{
     protected $id;
     protected $idUsuario;
     protected $idPublicacion;
     protected $idTipoReaccion;
+
+    public function __construct($idUsuario, $idComentario, $idTipoReaccion, $id = NULL) {
+        $this->idUsuario = $idUsuario;
+        $this->idComentario = $idComentario;
+        $this->idTiporeaccion= $idTipoReaccion;
+        $this->id = $id;
+      }
 
     public function getId(){
         return $this->id;
@@ -14,10 +21,10 @@ class Reaccion{
     public function getIdUsuario(){
         return $this->idUsuario;
     }
-    public function getIdPublicacion(){
-        return $this->idPublicacion;
+    public function getIdComentario(){
+        return $this->idComentario;
     }
-    public function getIdTiporeaccion(){
+    public function getIdTipoReaccion(){
         return $this->idTiporeaccion;
     }
 

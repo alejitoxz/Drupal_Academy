@@ -47,7 +47,7 @@ class Usuario implements Model{
     public function getEmail(){
         return $this->email;
     }
-    public function setName($nombre) {
+    public function setNombre($nombre) {
         $this->nombre = $nombre;
       }
 }

@@ -19,7 +19,6 @@ class StorageUsuario implements StorageInterface {
   }
 
   public function create(Model $usuario) {
-      var_dump($usuario);
     $columns = ['nombre','telefono','direccion','password','date','idNacionalidad','email'];
     $values = [$usuario->getNombre(),$usuario->getTelefono(),$usuario->getDireccion(),$usuario->getPassword(),$usuario->getDate(),$usuario->getIdNacionalidad(),$usuario->getEmail()];
     $this->query->insert($this->tableName, $columns, $values);
@@ -27,13 +26,13 @@ class StorageUsuario implements StorageInterface {
 
   public function update(Model $usuario) {
     $updateValues = [
-      ['column' => 'name', 'value' => $usuario->getNombre()],
-      ['column' => 'name', 'value' => $usuario->getTelefono()],
-      ['column' => 'name', 'value' => $usuario->getDireccion()],
-      ['column' => 'name', 'value' => $usuario->getPassword()],
-      ['column' => 'name', 'value' => $usuario->getDate()],
-      ['column' => 'name', 'value' => $usuario->getIdNacionalidad()],
-      ['column' => 'name', 'value' => $usuario->getEmail()],
+      ['column' => 'nombre', 'value' => $usuario->getNombre()],
+      ['column' => 'telefono', 'value' => $usuario->getTelefono()],
+      ['column' => 'direccion', 'value' => $usuario->getDireccion()],
+      ['column' => 'password', 'value' => $usuario->getPassword()],
+      ['column' => 'date', 'value' => $usuario->getDate()],
+      ['column' => 'idNacionalidad', 'value' => $usuario->getIdNacionalidad()],
+      ['column' => 'email', 'value' => $usuario->getEmail()],
     ];
     $conditions = [
       ['column' => 'id', 'value' => $usuario->getId()],
@@ -57,15 +56,15 @@ class StorageUsuario implements StorageInterface {
       return NULL;
     }
     $usuarioData = array_shift($usuarios);
-    $usuario = new Usuario($usuarioData['nombre'],$usuarioData['telefono'],$usuarioData['direcion'],$usuarioData['password'],$usuarioData['date'],$usuarioData['idNacionalidad'],$usuarioData['email'], $usuarioData['id']);
+    $usuario = new Usuario($usuarioData['nombre'],$usuarioData['telefono'],$usuarioData['direccion'],$usuarioData['password'],$usuarioData['date'],$usuarioData['idNacionalidad'],$usuarioData['email'], $usuarioData['id']);
     return $usuario;
   }
 
   public function getAll() {
-    $usuarioData = $this->query->find($this->tableName);
+    $usuariosData = $this->query->find($this->tableName);
     $usuarios = [];
-    foreach ($usuarioData as $usuarioData) {
-      $usuarios[] = new Usuario($usuarioData['nombre'],$usuarioData['telefono'],$usuarioData['direcion'],$usuarioData['password'],$usuarioData['date'],$usuarioData['idNacionalidad'],$usuarioData['email'], $usuarioData['id']);
+    foreach ($usuariosData as $usuarioData) {
+      $usuarios[] = new Usuario($usuarioData['nombre'],$usuarioData['telefono'],$usuarioData['direccion'],$usuarioData['password'],$usuarioData['date'],$usuarioData['idNacionalidad'],$usuarioData['email'], $usuarioData['id']);
     }
     return $usuarios;
   }
