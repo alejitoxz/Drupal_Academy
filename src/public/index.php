@@ -8,9 +8,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Slim\App;
 use Slim\Views\PhpRenderer;
 use PruebaPhp\util\db\QueryMysql;
-use PruebaPhp\model\mysql\StoragePais;
-use PruebaPhp\model\mysql\StorageTipoReaccion;
-use PruebaPhp\model\Pais;
+use PruebaPhp\model\mysql\StorageTipoReaccion;  
 use PruebaPhp\model\TipoReaccion;
 use PruebaPhp\model\Usuario;
 use PruebaPhp\model\mysql\StorageUsuario;
@@ -21,8 +19,16 @@ use PruebaPhp\model\mysql\StorageComentario;
 use PruebaPhp\model\Reaccion;
 use PruebaPhp\model\mysql\StorageReaccion;
 
+use PruebaPhp\controllers\pais\OverviewController;
+use PruebaPhp\controllers\pais\ViewController;
+use PruebaPhp\controllers\pais\EditController;
+use PruebaPhp\controllers\pais\UpdateController;
+use PruebaPhp\controllers\pais\DeleteController;
+use PruebaPhp\controllers\pais\CreateController;
+use PruebaPhp\controllers\pais\InsertController;
 
-
+use PruebaPhp\controllers\usuario\OverviewUController;
+use PruebaPhp\controllers\usuario\DeleteUController;
 
 $config = [];
 require 'settings.php';
@@ -42,44 +48,20 @@ $container['db'] = function ($c) {
   $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
   return $pdo;
 };
+$container['dbMysql'] = new QueryMysql($container['db']);
 
-$app->get('/registro', function (Request $request, Response $response) {
+$app->get('/pais', OverviewController::class);
+$app->get('/pais/{id}/view', ViewController::class);
+$app->get('/pais/{id}/edit', EditController::class);
+$app->post('/pais/{id}/edit', UpdateController::class);
+$app->get('/pais/create', CreateController::class);
+$app->post('/pais/create', InsertController::class);
+$app->get('/pais/{id}/delete', DeleteController::class);
 
-  //$response = $this->view->render($response, 'registro.phtml');
-  $query = new QueryMysql($this->db);
-  $storage = new StorageUsuario($query);
-  //$usuario = new Usuario('Diego','2725224','casa 80 #1-11','803fadf23','11-feb-2021','1','diego.caycedo@globant.com');
-  //$storage->create($usuario);
-  //$nombre = "Douglas";
-  //$usuarios = $storage->getById('1');
-  
-  //$usuarios->setNombre($nombre);
-  //$storage->update($usuarios);
-  var_dump($usuarios);  
+$app->get('/usuario', OverviewUController::class);
+$app->get('/usuario/{id}/delete', DeleteUController::class);
 
 
-  //delete
-  return $response;
-});
-
-$app->post('/registro', function (Request $request, Response $response) {
-  $body = $request->getBody();
-
-  $response->getBody()->write($body);
-  return $response;
-});
-
-$app->get('/pais', function (Request $request, Response $response) {
-
-  $query = new QueryMysql($this->db);
-  $storage = new StoragePais($query);
-  $pais = new Pais('Italia');
-  $storage->create($pais);
-  $paises = $storage->getAll();
-  var_dump($paises);
-  return $response;
-  
-});
 
 $app->get('/comentario', function (Request $request, Response $response) {
 
