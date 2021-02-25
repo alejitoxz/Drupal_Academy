@@ -5,7 +5,7 @@ namespace PruebaPhp\controllers\Usuario;
 use PruebaPhp\controllers\ControllerBase;
 
 
-class CreateController extends ControllerBase {
+class CreateUController extends ControllerBase {
 
   public function __invoke($request, $response, $args) {
     $usuario = NULL;

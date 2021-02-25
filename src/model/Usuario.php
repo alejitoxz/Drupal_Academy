@@ -47,7 +47,15 @@ class Usuario implements Model{
     public function getEmail(){
         return $this->email;
     }
-    public function setNombre($nombre) {
-        $this->nombre = $nombre;
-      }
+
+    public function setAll($nombre,$telefono,$direccion,$password,$date,$idNacionalidad,$email){
+       $this->nombre=$nombre;
+       $this->telefono=$telefono;
+       $this->direccion=$direccion;
+       $this->password=$password;
+       $this->date=$date;
+       $this->idNacionalidad=$idNacionalidad;
+       $this->email=$email;
+    }
+    
 }

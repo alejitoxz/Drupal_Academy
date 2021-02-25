@@ -29,6 +29,10 @@ use PruebaPhp\controllers\pais\InsertController;
 
 use PruebaPhp\controllers\usuario\OverviewUController;
 use PruebaPhp\controllers\usuario\DeleteUController;
+use PruebaPhp\controllers\usuario\EditUController;
+use PruebaPhp\controllers\usuario\UpdateUController;
+use PruebaPhp\controllers\usuario\CreateUController;
+use PruebaPhp\controllers\usuario\InsertUController;
 
 $config = [];
 require 'settings.php';
@@ -59,7 +63,12 @@ $app->post('/pais/create', InsertController::class);
 $app->get('/pais/{id}/delete', DeleteController::class);
 
 $app->get('/usuario', OverviewUController::class);
+$app->get('/usuario/{id}/view', ViewUController::class);
 $app->get('/usuario/{id}/delete', DeleteUController::class);
+$app->get('/usuario/{id}/edit', EditUController::class);
+$app->post('/usuario/{id}/edit', UpdateUController::class);
+$app->get('/usuario/create', CreateUController::class);
+$app->post('/usuario/create', InsertUController::class);
 
 
 
