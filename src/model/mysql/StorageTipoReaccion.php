@@ -23,31 +23,36 @@ class StorageTipoReaccion implements StorageInterface {
     public function update(Model $tipoReaccion) {
         $updateValues = [
           ['column' => 'tipoCara', 'value' => $tipoReaccion->getTipoCara()],
-          ['column' => 'imagen', 'value' => $TipoReaccion->getImagen()],
+          ['column' => 'imagen', 'value' => $tipoReaccion->getImagen()],
         ];
         $conditions = [
           ['column' => 'id', 'value' => $tipoReaccion->getId()],
         ];
         $this->query->update($this->tableName, $updateValues, $conditions);
     }
+    
     public function delete(Model $tipoReaccion) {
         $conditions = [
           ['column' => 'id', 'value' => $tipoReaccion->getId()],
         ];
         $this->query->delete($this->tableName, $conditions);
     }
+
+
     public function getById(String $id) : Model {
         $conditions = [
           ['column' => 'id', 'value' => $id],
         ];
-        $TipoReacciones = $this->query->find($this->tableName, [], $conditions);
+        $tipoReacciones = $this->query->find($this->tableName, [], $conditions);
         if (!count($tipoReacciones)) {
           return NULL;
         }
         $tipoReaccionData = array_shift($tipoReacciones);
-        $ttipoReaccion = new TipoReaccion($tipoReaccionData['tipoCara'],$tipoReaccionData['imagen'],$tipoReaccionData['id']);
+        $tipoReaccion = new TipoReaccion($tipoReaccionData['tipoCara'],$tipoReaccionData['imagen'],$tipoReaccionData['id']);
         return $tipoReaccion;
     }
+
+
     public function getAll() {
         $tipoReaccionesData = $this->query->find($this->tableName);
         $tipoReacciones = [];

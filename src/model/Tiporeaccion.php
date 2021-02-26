@@ -24,4 +24,8 @@ class TipoReaccion implements Model{
     public function getImagen(){
         return $this->imagen;
     }
+    public function setAll($tipoCara,$imagen){
+        $this->tipoCara = $tipoCara;
+        $this->imagen = $imagen;
+    }
 }   
