@@ -5,7 +5,7 @@ namespace PruebaPhp\controllers\usuario;
 use PruebaPhp\controllers\ControllerBase;
 use PruebaPhp\model\mysql\StorageUsuario;
 
-class OverviewUController extends ControllerBase {
+class OverviewController extends ControllerBase {
 
   public function __invoke($request, $response, $args) {
     $storage = new StorageUsuario($this->container->dbMysql);

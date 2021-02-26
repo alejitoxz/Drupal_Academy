@@ -5,7 +5,7 @@ namespace PruebaPhp\controllers\usuario;
 use PruebaPhp\controllers\ControllerBase;
 use PruebaPhp\model\mysql\StorageUsuario;
 
-class DeleteUController extends ControllerBase {
+class DeleteController extends ControllerBase {
 
   public function __invoke($request, $response, $args) {
     $id = $args['id'];

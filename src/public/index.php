@@ -27,13 +27,19 @@ use PruebaPhp\controllers\pais\DeleteController;
 use PruebaPhp\controllers\pais\CreateController;
 use PruebaPhp\controllers\pais\InsertController;
 
-use PruebaPhp\controllers\usuario\OverviewUController;
-use PruebaPhp\controllers\usuario\DeleteUController;
-use PruebaPhp\controllers\usuario\EditUController;
-use PruebaPhp\controllers\usuario\UpdateUController;
-use PruebaPhp\controllers\usuario\CreateUController;
-use PruebaPhp\controllers\usuario\InsertUController;
+use PruebaPhp\controllers\usuario\OverviewController as UserOverviewController;
+use PruebaPhp\controllers\usuario\DeleteController as UserDeleteController;
+use PruebaPhp\controllers\usuario\EditController as UserEditController;
+use PruebaPhp\controllers\usuario\UpdateController as UserUpdateController;
+use PruebaPhp\controllers\usuario\CreateController as UserCreateController;
+use PruebaPhp\controllers\usuario\InsertController as UserInsertController;
 
+use PruebaPhp\controllers\tipoReaccion\OverviewController as tpOverviewController;
+use PruebaPhp\controllers\tipoReaccion\DeleteController as tpDeleteController;
+use PruebaPhp\controllers\tipoReaccion\EditController as tpEditController;
+use PruebaPhp\controllers\tipoReaccion\UpdateController as tpUpdateController;
+use PruebaPhp\controllers\tipoReaccion\CreateController as tpCreateController;
+use PruebaPhp\controllers\TipoReaccion\InsertController as tpInsertController;
 $config = [];
 require 'settings.php';
 require '../../vendor/autoload.php';
@@ -62,13 +68,21 @@ $app->get('/pais/create', CreateController::class);
 $app->post('/pais/create', InsertController::class);
 $app->get('/pais/{id}/delete', DeleteController::class);
 
-$app->get('/usuario', OverviewUController::class);
-$app->get('/usuario/{id}/view', ViewUController::class);
-$app->get('/usuario/{id}/delete', DeleteUController::class);
-$app->get('/usuario/{id}/edit', EditUController::class);
-$app->post('/usuario/{id}/edit', UpdateUController::class);
-$app->get('/usuario/create', CreateUController::class);
-$app->post('/usuario/create', InsertUController::class);
+$app->get('/usuario', UserOverviewController::class);
+$app->get('/usuario/{id}/view', UserViewUController::class);
+$app->get('/usuario/{id}/delete', UserDeleteController::class);
+$app->get('/usuario/{id}/edit', UserEditController::class);
+$app->post('/usuario/{id}/edit', UserUpdateController::class);
+$app->get('/usuario/create', UserCreateController::class);
+$app->post('/usuario/create', UserInsertController::class);
+
+$app->get('/tiporeaccion', tpOverviewController::class);
+$app->get('/tiporeaccion/{id}/view', tpViewUController::class);
+$app->get('/tiporeaccion/{id}/delete', tpDeleteController::class);
+$app->get('/tiporeaccion/{id}/edit', tpEditController::class);
+$app->post('/tiporeaccion/{id}/edit', tpUpdateController::class);
+$app->get('/tiporeaccion/create', tpCreateController::class);
+$app->post('/tiporeaccion/create', tpInsertController::class);
 
 
 
@@ -103,16 +117,7 @@ $app->get('/publicacion', function (Request $request, Response $response) {
   return $response;
 });
 
-$app->get('/tiporeaccion', function (Request $request, Response $response) {
 
-  //$response = $this->view->render($response, 'tiporeaccion.phtml');
-
-  $query = new QueryMysql($this->db);
-  $storage = new StorageTipoReaccion($query);
-  $tipoReaccion = new TipoReaccion('like','1');
-  $storage->create($tipoReaccion);
-  return $response;
-});
 $app->get('/reaccion', function (Request $request, Response $response) {
 
   //$response = $this->view->render($response, 'tiporeaccion.phtml');

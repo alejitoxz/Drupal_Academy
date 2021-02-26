@@ -19,17 +19,19 @@ class StorageUsuario implements StorageInterface {
   }
 
   public function create(Model $usuario) {
+    $password = md5($usuario->getPassword());
     $columns = ['nombre','telefono','direccion','password','date','idNacionalidad','email'];
-    $values = [$usuario->getNombre(),$usuario->getTelefono(),$usuario->getDireccion(),$usuario->getPassword(),$usuario->getDate(),$usuario->getIdNacionalidad(),$usuario->getEmail()];
+    $values = [$usuario->getNombre(), $usuario->getTelefono(), $usuario->getDireccion(), $password, $usuario->getDate(),$usuario->getIdNacionalidad(),$usuario->getEmail()];
     $this->query->insert($this->tableName, $columns, $values);
   }
 
   public function update(Model $usuario) {
+    $password = md5($usuario->getPassword());
     $updateValues = [
       ['column' => 'nombre', 'value' => $usuario->getNombre()],
       ['column' => 'telefono', 'value' => $usuario->getTelefono()],
       ['column' => 'direccion', 'value' => $usuario->getDireccion()],
-      ['column' => 'password', 'value' => $usuario->getPassword()],
+      ['column' => 'password', 'value' => $password],
       ['column' => 'date', 'value' => $usuario->getDate()],
       ['column' => 'idNacionalidad', 'value' => $usuario->getIdNacionalidad()],
       ['column' => 'email', 'value' => $usuario->getEmail()],

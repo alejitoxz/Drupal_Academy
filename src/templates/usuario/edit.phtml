@@ -23,11 +23,16 @@
       <input type="text" name="password" value="<?= $usuario ? $usuario->getPassword() : "" ?>">
       <br>
       <label for="date">Fecha: </label>
-      <input type="text" name="date" value="<?= $usuario ? $usuario->getDate() : "" ?>">
+      <input type="datetime-local" name="date" value="<?= $usuario ? $usuario->getDate() : "" ?>">
       <br>
-      <label for="idNacionalidad">Nacionalidad: </label>
-      <input type="text" name="idNacionalidad" value="<?= $usuario ? $usuario->getIdNacionalidad() : "" ?>">
-      <br>
+      <label for="idNacionalidad" class="nacionalidad">Nacionalidad:</label>
+        
+        <select name="idNacionalidad" id="nacionalidad" autofocus>
+          <?php foreach($paises as $pais ): ?>
+          <option value="<?=$pais->getId()?>"><?=$pais->getNombre()?></option>
+          <?php endforeach; ?>
+        </select><br><br>
+
       <label for="email">email: </label>
       <input type="text" name="email" value="<?= $usuario ? $usuario->getEmail() : "" ?>">
       <br>

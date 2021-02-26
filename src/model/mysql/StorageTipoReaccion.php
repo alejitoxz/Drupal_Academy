@@ -40,20 +40,20 @@ class StorageTipoReaccion implements StorageInterface {
         $conditions = [
           ['column' => 'id', 'value' => $id],
         ];
-        $TipoReaccion = $this->query->find($this->tableName, [], $conditions);
-        if (!count($tipoReaccion)) {
+        $TipoReacciones = $this->query->find($this->tableName, [], $conditions);
+        if (!count($tipoReacciones)) {
           return NULL;
         }
-        $tipoReaccionData = array_shift($tipoReaccion);
+        $tipoReaccionData = array_shift($tipoReacciones);
         $ttipoReaccion = new TipoReaccion($tipoReaccionData['tipoCara'],$tipoReaccionData['imagen'],$tipoReaccionData['id']);
         return $tipoReaccion;
     }
     public function getAll() {
-        $tipoReaccionData = $this->query->find($this->tableName);
-        $tipoReaccion = [];
-        foreach ($tipoReaccionData as $tipoReaccionData) {
-          $tipoReaccion[] = new TipoReaccion($tipoReaccionData['tipoCara'],$tipoReaccionData['imagen'],$tipoReaccionData['id']);
+        $tipoReaccionesData = $this->query->find($this->tableName);
+        $tipoReacciones = [];
+        foreach ($tipoReaccionesData as $tipoReaccionData) {
+          $tipoReacciones[] = new TipoReaccion($tipoReaccionData['tipoCara'],$tipoReaccionData['imagen'],$tipoReaccionData['id']);
         }
-        return $tipoReaccionData;
+        return $tipoReacciones;
     }
 }

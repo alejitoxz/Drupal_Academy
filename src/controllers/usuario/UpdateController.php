@@ -5,17 +5,18 @@ namespace PruebaPhp\controllers\usuario;
 use PruebaPhp\controllers\ControllerBase;
 use PruebaPhp\model\mysql\StorageUsuario;
 
-class EditUController extends ControllerBase {
+class UpdateController extends ControllerBase {
 
   public function __invoke($request, $response, $args) {
     $id = $args['id'];
-    $usuario = NULL;
+    $body = $request->getParsedBody();
     if ($id) {
       $storage = new StorageUsuario($this->container->dbMysql);
       $usuario = $storage->getById($id);
+      $usuario->setAll($body['nombre'],$body['telefono'],$body['direccion'],$body['password'],$body['date'],$body['idNacionalidad'],$body['email']);
+      $storage->update($usuario);
     }
-    $response = $this->container->view->render($response, '/usuario/edit.phtml', ['usuario' => $usuario]);
-    return $response;
+    return $response->withRedirect('/usuario');
   }
 
 }
