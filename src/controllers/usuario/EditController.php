@@ -17,7 +17,7 @@ class EditController extends ControllerBase {
 
       $storageUsuario = new StorageUsuario($this->container->dbMysql);
       $usuario = $storageUsuario->getById($id);
-    }
+      }
     $response = $this->container->view->render($response, '/usuario/edit.phtml', ['usuario' => $usuario, 'paises'=>$paises]);
     return $response;
   }

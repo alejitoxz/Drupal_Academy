@@ -8,16 +8,6 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Slim\App;
 use Slim\Views\PhpRenderer;
 use PruebaPhp\util\db\QueryMysql;
-use PruebaPhp\model\mysql\StorageTipoReaccion;  
-use PruebaPhp\model\TipoReaccion;
-use PruebaPhp\model\Usuario;
-use PruebaPhp\model\mysql\StorageUsuario;
-use PruebaPhp\model\Publicacion;
-use PruebaPhp\model\mysql\StoragePublicacion;
-use PruebaPhp\model\Comentario;
-use PruebaPhp\model\mysql\StorageComentario;
-use PruebaPhp\model\Reaccion;
-use PruebaPhp\model\mysql\StorageReaccion;
 
 use PruebaPhp\controllers\pais\OverviewController;
 use PruebaPhp\controllers\pais\ViewController;
@@ -40,6 +30,14 @@ use PruebaPhp\controllers\tipoReaccion\EditController as tpEditController;
 use PruebaPhp\controllers\tipoReaccion\UpdateController as tpUpdateController;
 use PruebaPhp\controllers\tipoReaccion\CreateController as tpCreateController;
 use PruebaPhp\controllers\TipoReaccion\InsertController as tpInsertController;
+
+use PruebaPhp\controllers\publicacion\OverviewController as PubOverviewController;
+use PruebaPhp\controllers\publicacion\DeleteController as PubDeleteController;
+use PruebaPhp\controllers\publicacion\EditController as PubEditController;
+use PruebaPhp\controllers\publicacion\UpdateController as PubUpdateController;
+use PruebaPhp\controllers\publicacion\CreateController as PubCreateController;
+use PruebaPhp\controllers\publicacion\InsertController as PubInsertController;
+
 $config = [];
 require 'settings.php';
 require '../../vendor/autoload.php';
@@ -84,6 +82,13 @@ $app->post('/tiporeaccion/{id}/edit', tpUpdateController::class);
 $app->get('/tiporeaccion/create', tpCreateController::class);
 $app->post('/tiporeaccion/create', tpInsertController::class);
 
+$app->get('/publicacion', PubOverviewController::class);
+$app->get('/publicacion/{id}/view', PubViewUController::class);
+$app->get('/publicacion/{id}/delete', PubDeleteController::class);
+$app->get('/publicacion/{id}/edit', PubEditController::class);
+$app->post('/publicacion/{id}/edit', PubUpdateController::class);
+$app->get('/publicacion/create', PubCreateController::class);
+$app->post('/publicacion/create', PubInsertController::class);
 
 
 $app->get('/comentario', function (Request $request, Response $response) {
@@ -99,36 +104,5 @@ $app->get('/comentario', function (Request $request, Response $response) {
   return $response;
 });
 
-$app->get('/publicacion', function (Request $request, Response $response) {
 
-  //$response = $this->view->render($response, 'publicacion.phtml');
-  $query = new QueryMysql($this->db);
-  $storage = new StoragePublicacion($query);
-  $publicacion = new Publicacion('2','1171502725','hola soy hola mundo');
-  $storage->create($publicacion);
-
-  //delete
-  $publicacion = $storage->getById('1');
-  var_dump($publicacion);
-
-  //select all
-  $publicacion = $storage->getAll();
-  var_dump($publicacion);
-  return $response;
-});
-
-
-$app->get('/reaccion', function (Request $request, Response $response) {
-
-  //$response = $this->view->render($response, 'tiporeaccion.phtml');
-
-  $query = new QueryMysql($this->db);
-  $storage = new StorageReaccion($query);
-  //$reaccion = new Reaccion('1','1','1');
-  //$storage->create($reaccion);
-
-  $reaccion = $storage->getAll();
-  var_dump($reaccion);
-  return $response;
-});
 $app->run();

@@ -27,5 +27,11 @@ class Publicacion implements Model{
     public function getTexto(){
         return $this->texto;
     }
+    public function setAll($idUsuario, $date, $texto){
+        $this->idUsuario = $idUsuario;
+        $this->date = $date;
+        $this->texto = $texto;
+
+    }
 
 }
